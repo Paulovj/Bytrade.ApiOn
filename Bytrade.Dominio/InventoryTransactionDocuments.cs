@@ -12,6 +12,7 @@ namespace Bytrade.Dominio
 
         public int Id { get; set; }
         public int CompanyId { get; set; }
+        public int FileGenerationId { get; set; }
         public DateTime Date { get; set; }
         public string Name { get; set; }
 

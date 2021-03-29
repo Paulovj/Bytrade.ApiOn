@@ -12,6 +12,8 @@ namespace Bytrade.Dominio
 
         public int Id { get; set; }
         public int CompanyId { get; set; }
+        public int FileGenerationId  { get; set; }
+            
         public string GroupCode { get; set; }
         public string Barcode { get; set; }
         public string Tag { get; set; }

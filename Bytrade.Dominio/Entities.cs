@@ -7,6 +7,7 @@ namespace Bytrade.Dominio
     {
         public int Id { get; set; }
         public int CompanyId { get; set; }
+        public int FileGenerationId { get; set; }
         public int EntityTypeId { get; set; }
         public int EmpresaId { get; set; }
         public DateTime LastUpdateTime { get; set; }

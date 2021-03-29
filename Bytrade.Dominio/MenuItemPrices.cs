@@ -11,6 +11,8 @@ namespace Bytrade.Dominio
         public decimal Price { get; set; }
         public int CompanyId { get; set; }
 
+        public int FileGenerationId { get; set; }
+
         public virtual Company Company { get; set; }
         public virtual MenuItemPortions MenuItemPortion { get; set; }
     }

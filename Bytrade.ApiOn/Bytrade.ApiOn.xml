@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Bytrade.ApiOn</name>
+    </assembly>
+    <members>
+        <member name="M:Bytrade.ApiOn.Controllers.DownaloadController.download(System.Int32)">
+            <summary>
+            fazendo download de arquivo para atualização de cliente
+            </summary>
+            <param name="files"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bytrade.ApiOn.Controllers.EmpresaController.cadastro(Bytrade.Dominio.Empresa)">
+            <summary>
+            Cadastro de empresa
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bytrade.ApiOn.Controllers.EmpresaController.alteracao(Bytrade.Dominio.Empresa)">
+            <summary>
+            Alteração de empresa
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bytrade.ApiOn.Controllers.UploadController.Upload(System.Collections.Generic.List{Microsoft.AspNetCore.Http.IFormFile})">
+            <summary>
+            Somente arquivo zipado, para atualização do banco de dados
+            </summary>
+            <param name="files"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bytrade.ApiOn.Controllers.UploadController.Result(System.Int32)">
+            <summary>
+            Retorno
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Bytrade.Dominio.Controllers.WeatherForecastController">
+            <summary>
+            controle de acessp de cliente
+            </summary>
+        </member>
+        <member name="M:Bytrade.Dominio.Controllers.WeatherForecastController.#ctor(Microsoft.Extensions.Logging.ILogger{Bytrade.Dominio.Controllers.WeatherForecastController})">
+            <summary>
+             testando info
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:BytradeApiOn.Functions.Zip.compressDirectory(System.String,System.String,System.Int32)">
+            <summary>
+            Method that compress all the files inside a folder (non-recursive) into a zip file.
+            </summary>
+            <param name="DirectoryPath"></param>
+            <param name="OutputFilePath"></param>
+            <param name="CompressionLevel"></param>
+        </member>
+        <member name="M:BytradeApiOn.Functions.Zip.compressDirectoryWithPassword(System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Method that compress all the files inside a folder (non-recursive) into a zip file.
+            </summary>
+            <param name="DirectoryPath"></param>
+            <param name="OutputFilePath"></param>
+            <param name="CompressionLevel"></param>
+        </member>
+        <member name="M:BytradeApiOn.Functions.Zip.ExtractZipContent(System.String,System.String,System.String)">
+            <summary>
+            Extracts the content from a .zip file inside an specific folder.
+            </summary>
+            <param name="FileZipPath"></param>
+            <param name="password"></param>
+            <param name="OutputFolder"></param>
+        </member>
+    </members>
+</doc>

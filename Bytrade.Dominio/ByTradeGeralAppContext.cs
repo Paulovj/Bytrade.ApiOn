@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bytrade.Dominio
 {
     public partial class ByTradeGeralAppContext : DbContext
     {
-        
+       
         public ByTradeGeralAppContext(DbContextOptions<ByTradeGeralAppContext> options)
             : base(options)
         {
@@ -19,6 +20,7 @@ namespace Bytrade.Dominio
         public virtual DbSet<Company> Company { get; set; }
         public virtual DbSet<CostItems> CostItems { get; set; }
         public virtual DbSet<Entities> Entities { get; set; }
+        public virtual DbSet<Empresa> Empresa { get; set; }
         public virtual DbSet<FileGeneration> FileGeneration { get; set; }
         public virtual DbSet<InventoryItems> InventoryItems { get; set; }
         public virtual DbSet<InventoryTransactionDocuments> InventoryTransactionDocuments { get; set; }
@@ -268,11 +270,58 @@ namespace Bytrade.Dominio
                     .HasConstraintName("Company_Entities_fk1");
             });
 
+            modelBuilder.Entity<Empresa>(entity =>
+            {
+                entity.HasKey(e => e.IdEmpresa)
+                    .HasName("IdEmpresa");
+
+                entity.Property(e => e.Cidade)
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CodEmpresa)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DataAlteracao).HasColumnType("datetime");
+
+                entity.Property(e => e.DataCadastro).HasColumnType("datetime");
+
+                entity.Property(e => e.DataExclusao).HasColumnType("datetime");
+
+                entity.Property(e => e.Endereco)
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IdUsuarioAlteracao)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IdUsuarioCadastro)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IdUsuarioExclusao)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NomeSocial)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TipoNegocio)
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<FileGeneration>(entity =>
             {
                 entity.HasIndex(e => e.CompanyId);
-
-                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.DateGeneration).HasColumnType("datetime");
 
@@ -292,7 +341,7 @@ namespace Bytrade.Dominio
 
             modelBuilder.Entity<InventoryItems>(entity =>
             {
-                entity.HasIndex(e => e.CompanyId);
+                 
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
@@ -386,17 +435,17 @@ namespace Bytrade.Dominio
                     .IsRequired()
                     .HasColumnType("text");
 
-                entity.HasOne(d => d.Company)
-                    .WithMany(p => p.Log)
-                    .HasForeignKey(d => d.CompanyId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("Company_Log_fk1");
+                //entity.HasOne(d => d.Company)
+                //    .WithMany(p => p.Log)
+                //    .HasForeignKey(d => d.CompanyId)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("Company_Log_fk1");
 
-                entity.HasOne(d => d.FileGeneration)
-                    .WithMany(p => p.Log)
-                    .HasForeignKey(d => d.FileGenerationId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FileGeneration_Log_fk1");
+                //entity.HasOne(d => d.FileGeneration)
+                //    .WithMany(p => p.Log)
+                //    .HasForeignKey(d => d.FileGenerationId)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FileGeneration_Log_fk1");
             });
 
             modelBuilder.Entity<MenuItemPortions>(entity =>
@@ -533,15 +582,13 @@ namespace Bytrade.Dominio
                     .IsUnicode(false);
 
                 entity.Property(e => e.Cnpj)
-                    .IsRequired()
                     .HasColumnName("CNPJ")
-                    .HasMaxLength(1)
+                    .HasMaxLength(18)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Cpf)
-                    .IsRequired()
                     .HasColumnName("CPF")
-                    .HasMaxLength(1)
+                    .HasMaxLength(14)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Date).HasColumnType("datetime");

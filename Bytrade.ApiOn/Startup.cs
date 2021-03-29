@@ -1,10 +1,16 @@
+using Bytrade.Dominio;
+using Bytrade.Repo.Interfaces;
+using Bytrade.Repo.Services;
+using BytradeApiOff;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Quartz;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,6 +36,77 @@ namespace Bytrade.ApiOn
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnetions"));
             });
+            
+
+            
+            services.AddScoped<IEmpresaRepository, EmpresaRepository>();
+            services.AddScoped<IFileGenerationsRepository, FileGenerationsRepository>();
+            services.AddScoped<ILogRepository, LogRepository>();
+
+            services.AddScoped<IEntitiesRepository, EntitiesRepository>();
+            services.AddScoped<IInventoryItemsRepository, InventoryItemsRepository>();
+            services.AddScoped<IInventoryTransactionDocumentsRepository, InventoryTransactionDocumentsRepository>();
+            services.AddScoped<IMenuItemPortionsRepository, MenuItemPortionsRepository>();
+            services.AddScoped<IMenuItemPricesRepository, MenuItemPricesRepository>();
+            services.AddScoped<IInventoryItemsRepository, InventoryItemsRepository>();
+            services.AddScoped<IMenuItemsRepository, MenuItemsRepository>();
+
+            List<DayOfWeek> dayOfWeeks = new List<DayOfWeek>();
+
+            dayOfWeeks.Add(DayOfWeek.Monday);
+            dayOfWeeks.Add(DayOfWeek.Sunday);
+            dayOfWeeks.Add(DayOfWeek.Tuesday);
+            dayOfWeeks.Add(DayOfWeek.Wednesday);
+            dayOfWeeks.Add(DayOfWeek.Thursday);
+            dayOfWeeks.Add(DayOfWeek.Friday);
+            dayOfWeeks.Add(DayOfWeek.Saturday);
+
+            var jobKey = new JobKey("Tarefas");
+            services.AddQuartz(q =>
+            {
+                q.SchedulerId = "Tarefas";
+                q.SchedulerName = "Tarefas";
+                q.UseMicrosoftDependencyInjectionScopedJobFactory();
+                q.AddJob<Services>(j => j.WithIdentity(jobKey));
+                q.AddTrigger(t => t
+                   .WithIdentity("Tarefas")
+                   .ForJob(jobKey)
+                   .StartNow()
+                   .WithSimpleSchedule(x => x
+        .WithIntervalInSeconds(30)
+        .RepeatForever())
+                );
+                    // base quartz scheduler, job and trigger configuration
+                });
+
+
+
+            //    services.AddQuartz(q =>
+            //    {
+            //        q.SchedulerId = "Tarefas";
+            //        q.SchedulerName = "Tarefas";
+            //        q.UseMicrosoftDependencyInjectionScopedJobFactory();
+            //        q.AddJob<CronLog>(j => j.WithIdentity(jobKey));
+            //        q.AddTrigger(t => t
+            //           .WithIdentity("Tarefa de log")
+            //           .ForJob(jobKey)
+            //           .StartNow()
+            //           .WithSimpleSchedule(x => x
+            //.WithIntervalInSeconds(50)
+            //.RepeatForever())
+            //        );
+            //        // base quartz scheduler, job and trigger configuration
+            //    });
+
+
+            //    // ASP.NET Core hosting
+            services.AddQuartzServer(options =>
+            {
+                    // when shutting down we want jobs to complete gracefully
+                    options.WaitForJobsToComplete = true;
+            });
+
+
 
             services.AddControllers();
             services.AddSwaggerGen(option => {
@@ -37,7 +114,7 @@ namespace Bytrade.ApiOn
                     "BytradeApi",
                     new Microsoft.OpenApi.Models.OpenApiInfo()
                     {
-                        Title = "Bytrade Api",
+                        Title = "Bytrade - Api On",
                         Version = "1.0"
 
                     }

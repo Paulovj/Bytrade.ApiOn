@@ -8,7 +8,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bytrade.ApiOn", "Bytrade.Ap
 		{915C23BA-1FE5-4C12-BB02-36C69907CA39} = {915C23BA-1FE5-4C12-BB02-36C69907CA39}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bytrade.Dominio", "Bytrade.Dominio\Bytrade.Dominio.csproj", "{915C23BA-1FE5-4C12-BB02-36C69907CA39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bytrade.Dominio", "Bytrade.Dominio\Bytrade.Dominio.csproj", "{915C23BA-1FE5-4C12-BB02-36C69907CA39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bytrade.Repo", "Bytrade.Repo\Bytrade.Repo.csproj", "{849E9BC1-9B13-4811-9A81-4F55C5CD2418}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +26,10 @@ Global
 		{915C23BA-1FE5-4C12-BB02-36C69907CA39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{915C23BA-1FE5-4C12-BB02-36C69907CA39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{915C23BA-1FE5-4C12-BB02-36C69907CA39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{849E9BC1-9B13-4811-9A81-4F55C5CD2418}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{849E9BC1-9B13-4811-9A81-4F55C5CD2418}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{849E9BC1-9B13-4811-9A81-4F55C5CD2418}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{849E9BC1-9B13-4811-9A81-4F55C5CD2418}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
